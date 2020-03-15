@@ -9,6 +9,7 @@ import java.util.UUID;
 /**
  * Created by jeffreymzd on 3/15/20
  */
+
 @Service
 @Slf4j
 public class BeerServiceImpl implements BeerService {
