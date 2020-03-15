@@ -100,9 +100,6 @@ class BeerControllerTest {
     @Test
     void deleteBeer() throws Exception {
 
-        BeerDto beerDto = BeerDto.builder().build();
-        String beerDtoJson = objectMapper.writeValueAsString(beerDto);
-
         mockMvc.perform(delete("/api/v1/beer/" + validBeer.getId())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
