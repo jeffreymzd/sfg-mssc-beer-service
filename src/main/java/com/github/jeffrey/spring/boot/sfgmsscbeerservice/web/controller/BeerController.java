@@ -2,6 +2,9 @@ package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.controller;
 
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.service.BeerService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +17,13 @@ import java.util.UUID;
 /**
  * Created by jeffreymzd on 3/15/20
  */
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/beer")
 @RestController
+@Slf4j
 public class BeerController {
 
-    public BeerController(BeerService beerService) {
-        this.beerService = beerService;
-    }
-
-    private BeerService beerService;
+    private final BeerService beerService;
 
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDto> getBeer(@NotNull @PathVariable("beerId") UUID beerId) {
@@ -33,12 +34,12 @@ public class BeerController {
     @PostMapping
     public ResponseEntity saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
 
-        BeerDto savedDto = beerService.save(beerDto);
+        val savedDto = beerService.save(beerDto);
 
         // todo impl so savedDto should return valid UUID
         if (null == savedDto.getId()) savedDto.setId(UUID.randomUUID());
 
-        HttpHeaders header = new HttpHeaders();
+        val header = new HttpHeaders();
         header.add("Location", "/api/v1/beer/" + savedDto.getId().toString());
 
         return new ResponseEntity(header, HttpStatus.CREATED);
