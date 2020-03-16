@@ -5,7 +5,6 @@ import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Entity;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -16,7 +15,6 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-@Entity
 public class BeerServiceImpl implements BeerService {
     @Override
     public BeerDto getBeerById(UUID beerId) {
