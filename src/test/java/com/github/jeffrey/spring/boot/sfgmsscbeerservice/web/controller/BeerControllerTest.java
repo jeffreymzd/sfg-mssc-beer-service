@@ -1,6 +1,5 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum;
@@ -16,16 +15,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by jeffreymzd on 3/15/20
@@ -48,14 +44,15 @@ class BeerControllerTest {
     @BeforeEach
     void setUp() {
 
-        validBeer = BeerDto.builder().id(UUID.randomUUID())
+        validBeer = BeerDto.builder()
+//                .id(UUID.randomUUID())
                 .beerName("Stella")
                 .beerStyle(BeerStyleEnum.PALE_ALE)
-                .createdDate(OffsetDateTime.now())
-                .lastModifiedDate(OffsetDateTime.now())
+//                .createdDate(OffsetDateTime.now())
+//                .lastModifiedDate(OffsetDateTime.now())
                 .price(new BigDecimal(2.5))
                 .quantityOnHand(100)
-                .version(1)
+//                .version(1)
                 .build();
     }
 
@@ -64,10 +61,9 @@ class BeerControllerTest {
 
         given(beerService.getBeerById(any())).willReturn(validBeer);
 
-        mockMvc.perform(get("/api/v1/beer/" + validBeer.getId()).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is(validBeer.getId().toString()))) // note MockMvcResultMatchers.jsonPath, in org.springframework.test.web.servlet.result√
                 .andExpect(jsonPath("$.beerName", is(validBeer.getBeerName())));
     }
 
@@ -76,7 +72,7 @@ class BeerControllerTest {
 
         given(beerService.save(any())).willReturn(validBeer);
 
-        BeerDto beerDto = BeerDto.builder().build();
+        BeerDto beerDto = validBeer;
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
         mockMvc.perform(post("/api/v1/beer/")
@@ -88,10 +84,10 @@ class BeerControllerTest {
     @Test
     void updateBeer() throws Exception {
 
-        BeerDto beerDto = BeerDto.builder().build();
+        BeerDto beerDto = validBeer;
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
-        mockMvc.perform(put("/api/v1/beer/" + validBeer.getId())
+        mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
                 .andExpect(status().isNoContent());
@@ -100,7 +96,7 @@ class BeerControllerTest {
     @Test
     void deleteBeer() throws Exception {
 
-        mockMvc.perform(delete("/api/v1/beer/" + validBeer.getId())
+        mockMvc.perform(delete("/api/v1/beer/" + UUID.randomUUID().toString())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
