@@ -90,7 +90,8 @@ class BeerControllerTest {
                                fieldWithPath("beerStyle").description("Beer Style"),
                                fieldWithPath("upc").description("UPC of Beer"),
                                fieldWithPath("price").description("Price"),
-                               fieldWithPath("quantityOnHand").description("Quantity On Hand")
+                               fieldWithPath("quantityOnHand").description("Quantity On Hand"),
+                               fieldWithPath("lastRestockDate").description("Date Last Restocked")
                         )));
     }
 
@@ -118,7 +119,8 @@ class BeerControllerTest {
                                 fields.withPath("beerStyle").description("Beer Style"),
                                 fields.withPath("upc").description("UPC of Beer"),
                                 fields.withPath("price").description("Price"),
-                                fields.withPath("quantityOnHand").ignored()
+                                fields.withPath("quantityOnHand").ignored(),
+                                fieldWithPath("lastRestockDate").ignored()
                         )));
     }
 
