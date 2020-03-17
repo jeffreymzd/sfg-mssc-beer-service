@@ -26,7 +26,10 @@ class BeerDtoTest extends BaseTest{
     @Test
     void testDeserializeJsonString() throws JsonProcessingException {
 
-        String jsonString = "{\"id\":\"ea7e4087-fd1f-49cc-afba-ade7f27e55a8\",\"version\":null,\"createdDate\":\"2020-03-17T13:34:59.929729-04:00\",\"lastModifiedDate\":\"2020-03-17T13:34:59.930801-04:00\",\"beerName\":\"Galaxy\",\"beerStyle\":\"PALE_ALE\",\"upc\":123456789012,\"price\":12.949999999999999289457264239899814128875732421875,\"quantityOnHand\":null}";
+        // default createdDate - BROKEN
+//        String jsonString = "{\"id\":\"ea7e4087-fd1f-49cc-afba-ade7f27e55a8\",\"version\":null,\"createdDate\":\"2020-03-17T13:34:59.929729-04:00\",\"lastModifiedDate\":\"2020-03-17T13:34:59.930801-04:00\",\"beerName\":\"Galaxy\",\"beerStyle\":\"PALE_ALE\",\"upc\":123456789012,\"price\":12.949999999999999289457264239899814128875732421875,\"quantityOnHand\":null}";
+        // json format createdDate
+        String jsonString = "{\"id\":\"ea7e4087-fd1f-49cc-afba-ade7f27e55a8\",\"version\":null,\"createdDate\":\"20200317T15:54:45-0400\",\"lastModifiedDate\":\"20200317T15:54:45-0400\",\"beerName\":\"Galaxy\",\"beerStyle\":\"PALE_ALE\",\"upc\":123456789012,\"price\":12.949999999999999289457264239899814128875732421875,\"quantityOnHand\":null}";
 
         BeerDto beerDto = objectMapper.readValue(jsonString, BeerDto.class);
 
