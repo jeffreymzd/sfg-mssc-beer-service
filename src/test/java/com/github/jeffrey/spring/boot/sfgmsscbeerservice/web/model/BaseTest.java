@@ -1,6 +1,7 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -18,6 +19,7 @@ public class BaseTest {
                 .lastModifiedDate(OffsetDateTime.now())
                 .price(new BigDecimal(12.95))
                 .upc(123456789012L)
+                .lastRestockDate(LocalDate.now())
                 .build();
     }
 }
