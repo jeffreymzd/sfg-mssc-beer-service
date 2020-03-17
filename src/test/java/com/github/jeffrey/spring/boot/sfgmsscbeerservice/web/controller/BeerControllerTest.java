@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by jeffreymzd on 3/15/20
  */
-@AutoConfigureRestDocs
+@AutoConfigureRestDocs(uriScheme = "https", uriHost = "dev.springframework.guru", uriPort = 80)
 @ExtendWith({SpringExtension.class, RestDocumentationExtension.class})
 @WebMvcTest(controllers = BeerController.class)
 class BeerControllerTest {
@@ -75,7 +75,7 @@ class BeerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.beerName", is(validBeer.getBeerName())))
-                .andDo(document("v1/beer",
+                .andDo(document("v1/beer-get",
                         // documenting path parameters
                         pathParameters(
                                 parameterWithName("beerId").description("UUID of desired beer to get.")
@@ -104,11 +104,11 @@ class BeerControllerTest {
 
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 
-        mockMvc.perform(post("/api/v1/beer/")
+        mockMvc.perform(post("/api/v1/beer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
                 .andExpect(status().isCreated())
-                .andDo(document("v1/beer",
+                .andDo(document("v1/beer-post",
                         requestFields(
                                 fields.withPath("id").ignored(),
                                 fields.withPath("version").ignored(),
