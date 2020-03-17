@@ -1,48 +1,64 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.service;
 
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.domain.Beer;
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.exception.NotFoundException;
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.repository.BeerRepository;
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.mapper.BeerMapper;
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 /**
  * Created by jeffreymzd on 3/15/20
  */
-
+@RequiredArgsConstructor
 @Service
 @Slf4j
 public class BeerServiceImpl implements BeerService {
+
+    private final BeerRepository beerRepository;
+    private final BeerMapper beerMapper;
+
+    private Beer findBeerById(UUID beerId) {
+        return beerRepository.
+                findById(beerId)
+                .orElseThrow(NotFoundException::new);
+    }
+
     @Override
     public BeerDto getBeerById(UUID beerId) {
-        return BeerDto.builder()
-                .id(UUID.randomUUID())
-                .beerName("Stella")
-                .beerStyle(BeerStyleEnum.PALE_ALE)
-                .createdDate(OffsetDateTime.now())
-                .lastModifiedDate(OffsetDateTime.now())
-                .price(new BigDecimal(2.5))
-                .quantityOnHand(100)
-                .upc(123456789012L)
-                .version(1)
-                .build();
+
+        return beerMapper.beerToBeerDto(findBeerById(beerId));
     }
 
     @Override
     public BeerDto save(BeerDto beerDto) {
-        return BeerDto.builder().id(UUID.randomUUID()).build();
+
+        return beerMapper
+                .beerToBeerDto(beerRepository
+                .save(beerMapper
+                        .beerDtoToBeer(beerDto)));
     }
 
     @Override
-    public void updateBeer(UUID beerId, BeerDto beerDto) {
-        log.info("Updating a beer: {}", beerId);
+    public BeerDto updateBeer(UUID beerId, BeerDto beerDto) {
+
+        Beer beer = findBeerById(beerId);
+
+        beer.setBeerName(beerDto.getBeerName());
+        beer.setBeerStyle(beerDto.getBeerStyle().name());
+        beer.setPrice(beerDto.getPrice());
+        beer.setUpc(beerDto.getUpc());
+
+        return beerMapper.beerToBeerDto(beerRepository.save(beer));
     }
 
     @Override
     public void deleteBeer(UUID beerId) {
-        log.info("Deleting a beer: {}", beerId);
+
+        beerRepository.delete(findBeerById(beerId));
     }
 }
