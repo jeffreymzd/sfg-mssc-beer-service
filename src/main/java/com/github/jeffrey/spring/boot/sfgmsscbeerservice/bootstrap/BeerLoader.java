@@ -5,14 +5,13 @@ import com.github.jeffrey.spring.boot.sfgmsscbeerservice.repository.BeerReposito
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 /**
  * Created by jeffreymzd on 3/16/20
  */
-@Component
+//@Component
 @Slf4j
 public class BeerLoader implements CommandLineRunner {
 
