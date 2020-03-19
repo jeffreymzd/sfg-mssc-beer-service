@@ -1,6 +1,9 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.service;
 
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerPagedList;
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.UUID;
 
@@ -15,4 +18,6 @@ public interface BeerService {
     BeerDto updateBeer(UUID beerId, BeerDto beerDto);
 
     void deleteBeer(UUID beerId);
+
+    BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest request);
 }

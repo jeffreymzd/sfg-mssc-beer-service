@@ -59,7 +59,7 @@ class BeerControllerTest {
                 .beerName("Stella")
                 .beerStyle(BeerStyleEnum.PALE_ALE)
                 .price(new BigDecimal(2.5))
-                .upc(1234L)
+                .upc("063234560098")
                 .quantityOnHand(100)
                 .build();
     }
