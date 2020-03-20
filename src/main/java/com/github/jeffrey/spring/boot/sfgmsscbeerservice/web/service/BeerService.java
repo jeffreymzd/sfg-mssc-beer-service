@@ -20,4 +20,6 @@ public interface BeerService {
     void deleteBeer(UUID beerId);
 
     BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest request, Boolean showInventoryOnHand);
+
+    BeerDto getBeerByUpc(String upc, Boolean showInventoryOnHand);
 }
