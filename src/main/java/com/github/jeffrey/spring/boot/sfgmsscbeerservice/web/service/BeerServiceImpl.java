@@ -9,6 +9,7 @@ import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerPagedList
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,11 @@ public class BeerServiceImpl implements BeerService {
                 .orElseThrow(NotFoundException::new);
     }
 
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false")
     @Override
     public BeerDto getBeerById(UUID beerId, Boolean showInventoryOnHand) {
+
+        System.out.println("I was called");
         if (showInventoryOnHand)
             return beerMapper.beerToBeerDtoWithInventory(findBeerById(beerId));
         else
@@ -70,9 +74,11 @@ public class BeerServiceImpl implements BeerService {
         beerRepository.delete(findBeerById(beerId));
     }
 
+    @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false")
     @Override
     public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest request, Boolean showInventoryOnHand) {
 
+        System.out.println("I was called");
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
 
