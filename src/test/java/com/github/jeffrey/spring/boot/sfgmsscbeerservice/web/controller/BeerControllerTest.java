@@ -23,6 +23,7 @@ import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
@@ -67,7 +68,7 @@ class BeerControllerTest {
     @Test
     void getBeer() throws Exception {
 
-        given(beerService.getBeerById(any())).willReturn(getValidBeerDto());
+        given(beerService.getBeerById(any(), anyBoolean())).willReturn(getValidBeerDto());
 
         validBeer = getValidBeerDto();
 
