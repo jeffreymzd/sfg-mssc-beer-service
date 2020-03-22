@@ -21,7 +21,8 @@ import java.util.UUID;
 @Component
 public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryService {
 
-    private final String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
+    private final String INVENTORY_PATH_BY_ID = "/api/v1/beer/{beerId}/inventory";
+    private final String INVENTORY_PATH_BY_UPC = "/api/v1/beerUpc/{beerUpc}/inventory";
     private final RestTemplate restTemplate;
 
     @Value("${sfg.brewery.beerInventoryServiceHost}")
@@ -34,11 +35,28 @@ public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryServic
     @Override
     public Integer getOnHandInventory(UUID beerId) {
 
-        log.info("Calling Beer Inventory Service");
+        log.info("Calling Beer Inventory Service by Beer Id");
 
         ResponseEntity<List<BeerInventoryDto>> responseEntity = restTemplate
-                .exchange(beerInventoryServiceHost + INVENTORY_PATH, HttpMethod.GET, null,
+                .exchange(beerInventoryServiceHost + INVENTORY_PATH_BY_ID, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<BeerInventoryDto>>() {}, beerId);
+
+        Integer onHand = Objects.requireNonNull(responseEntity.getBody())
+                .stream()
+                .mapToInt(BeerInventoryDto::getQuantityOnHand)
+                .sum();
+
+        return onHand;
+    }
+
+    @Override
+    public Integer getOnHandInventory(String beerUpc) {
+
+        log.info("Calling Beer Inventory Service by Beer UPC");
+
+        ResponseEntity<List<BeerInventoryDto>> responseEntity = restTemplate
+                .exchange(beerInventoryServiceHost + INVENTORY_PATH_BY_UPC, HttpMethod.GET, null,
+                        new ParameterizedTypeReference<List<BeerInventoryDto>>() {}, beerUpc);
 
         Integer onHand = Objects.requireNonNull(responseEntity.getBody())
                 .stream()

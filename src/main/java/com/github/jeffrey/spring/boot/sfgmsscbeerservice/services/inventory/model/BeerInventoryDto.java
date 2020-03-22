@@ -17,5 +17,6 @@ import java.util.UUID;
 public class BeerInventoryDto {
 
     private UUID beerId;
+    private String beerUpc;
     private Integer quantityOnHand;
 }

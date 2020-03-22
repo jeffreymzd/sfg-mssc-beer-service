@@ -18,11 +18,20 @@ class BeerInventoryServiceRestTemplateImplTest {
     BeerInventoryService beerInventoryService;
 
     @Test
-    void getOnHandInventory() {
+    void getOnHandInventoryById() {
 
         UUID id = UUID.randomUUID();
         Integer quantity = beerInventoryService.getOnHandInventory(id);
         System.out.println("Id: " + id);
+        System.out.println("Returned quantityOnHand: " + quantity);
+    }
+
+    @Test
+    void getOnHandInventoryByUpc() {
+
+        String upc = "0631234200036";
+        Integer quantity = beerInventoryService.getOnHandInventory(upc);
+        System.out.println("UPC: " + upc);
         System.out.println("Returned quantityOnHand: " + quantity);
     }
 }
