@@ -1,5 +1,8 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model;
 
+import guru.sfg.beer.common.model.BeerDto;
+import guru.sfg.beer.common.model.BeerStyleEnum;
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;

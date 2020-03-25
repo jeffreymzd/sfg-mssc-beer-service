@@ -1,13 +1,15 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.inventory;
 
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.inventory.model.BeerInventoryDto;
+import guru.sfg.beer.common.model.BeerInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -29,7 +31,9 @@ public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryServic
     private String beerInventoryServiceHost;
 
     public BeerInventoryServiceRestTemplateImpl(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
+        this.restTemplate = restTemplateBuilder
+//                .errorHandler(new InventoryResponseErrorHandler())
+                .build();
     }
 
     @Override
@@ -54,15 +58,23 @@ public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryServic
 
         log.info("Calling Beer Inventory Service by Beer UPC");
 
-        ResponseEntity<List<BeerInventoryDto>> responseEntity = restTemplate
-                .exchange(beerInventoryServiceHost + INVENTORY_PATH_BY_UPC, HttpMethod.GET, null,
-                        new ParameterizedTypeReference<List<BeerInventoryDto>>() {}, beerUpc);
+        ResponseEntity<List<BeerInventoryDto>> responseEntity;
+        try {
+            responseEntity= restTemplate
+                    .exchange(beerInventoryServiceHost + INVENTORY_PATH_BY_UPC, HttpMethod.GET, null,
+                            new ParameterizedTypeReference<List<BeerInventoryDto>>() {
+                            }, beerUpc);
+        } catch (HttpClientErrorException e) {
+            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+                return 0;
+            } else {
+                throw e;
+            }
+        }
 
-        Integer onHand = Objects.requireNonNull(responseEntity.getBody())
+        return Objects.requireNonNull(responseEntity.getBody())
                 .stream()
                 .mapToInt(BeerInventoryDto::getQuantityOnHand)
                 .sum();
-
-        return onHand;
     }
 }

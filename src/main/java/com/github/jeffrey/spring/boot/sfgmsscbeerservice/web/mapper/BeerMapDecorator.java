@@ -2,7 +2,7 @@ package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.mapper;
 
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.domain.Beer;
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.inventory.BeerInventoryService;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
+import guru.sfg.beer.common.model.BeerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

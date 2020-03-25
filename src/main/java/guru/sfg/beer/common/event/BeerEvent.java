@@ -1,9 +1,10 @@
-package com.github.jeffrey.spring.boot.sfgmsscbeerservice.event;
+package guru.sfg.beer.common.event;
 
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
+import guru.sfg.beer.common.model.BeerDto;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -12,10 +13,11 @@ import java.io.Serializable;
  */
 @Data
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class BeerEvent implements Serializable {
 
 
     private static final long serialVersionUID = 1935424428211105886L;
-    private final BeerDto beerDto;
+    private BeerDto beerDto;
 }

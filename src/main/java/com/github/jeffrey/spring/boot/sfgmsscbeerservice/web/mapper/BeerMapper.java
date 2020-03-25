@@ -1,7 +1,7 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.mapper;
 
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.domain.Beer;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
+import guru.sfg.beer.common.model.BeerDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 

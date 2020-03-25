@@ -1,4 +1,4 @@
-package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model;
+package guru.sfg.beer.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,6 @@ import java.util.UUID;
 /**
  * Created by jeffreymzd on 3/15/20
  */
-
 @Data // getters, setters, equals, hashcode
 @NoArgsConstructor
 @AllArgsConstructor

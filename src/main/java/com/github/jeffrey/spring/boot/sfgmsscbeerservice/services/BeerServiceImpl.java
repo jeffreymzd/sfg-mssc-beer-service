@@ -1,12 +1,12 @@
-package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.service;
+package com.github.jeffrey.spring.boot.sfgmsscbeerservice.services;
 
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.domain.Beer;
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.exception.NotFoundException;
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.repository.BeerRepository;
 import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.mapper.BeerMapper;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerPagedList;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum;
+import guru.sfg.beer.common.model.BeerDto;
+import guru.sfg.beer.common.model.BeerPagedList;
+import guru.sfg.beer.common.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;

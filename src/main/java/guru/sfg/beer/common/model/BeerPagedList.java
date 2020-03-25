@@ -1,4 +1,4 @@
-package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model;
+package guru.sfg.beer.common.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

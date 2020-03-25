@@ -1,8 +1,8 @@
-package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.service;
+package com.github.jeffrey.spring.boot.sfgmsscbeerservice.services;
 
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerPagedList;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum;
+import guru.sfg.beer.common.model.BeerDto;
+import guru.sfg.beer.common.model.BeerPagedList;
+import guru.sfg.beer.common.model.BeerStyleEnum;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.UUID;

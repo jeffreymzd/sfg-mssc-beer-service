@@ -1,9 +1,9 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.controller;
 
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerPagedList;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.service.BeerService;
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.BeerService;
+import guru.sfg.beer.common.model.BeerDto;
+import guru.sfg.beer.common.model.BeerPagedList;
+import guru.sfg.beer.common.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

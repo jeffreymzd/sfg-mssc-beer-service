@@ -1,4 +1,4 @@
-package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model;
+package guru.sfg.beer.common.model;
 
 /**
  * Created by jeffreymzd : 3/15/20

@@ -1,9 +1,9 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerDto;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.model.BeerStyleEnum;
-import com.github.jeffrey.spring.boot.sfgmsscbeerservice.web.service.BeerService;
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.BeerService;
+import guru.sfg.beer.common.model.BeerDto;
+import guru.sfg.beer.common.model.BeerStyleEnum;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

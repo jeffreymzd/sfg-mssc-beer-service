@@ -1,4 +1,4 @@
-package com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.inventory.model;
+package guru.sfg.beer.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,5 +1,6 @@
-package com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.inventory;
+package com.github.jeffrey.spring.boot.sfgmsscbeerservice.services;
 
+import com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.inventory.BeerInventoryService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
