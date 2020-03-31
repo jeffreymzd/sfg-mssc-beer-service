@@ -1,6 +1,6 @@
 package com.github.jeffrey.spring.boot.sfgmsscbeerservice.services.inventory;
 
-import guru.sfg.beer.common.model.BeerInventoryDto;
+import guru.sfg.brewery.model.BeerInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
