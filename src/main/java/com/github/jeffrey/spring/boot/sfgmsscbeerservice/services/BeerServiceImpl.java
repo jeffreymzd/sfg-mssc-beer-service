@@ -51,7 +51,7 @@ public class BeerServiceImpl implements BeerService {
 
         return beerMapper
                 .beerToBeerDto(beerRepository
-                .save(beerMapper
+                .saveAndFlush(beerMapper
                         .beerDtoToBeer(beerDto)));
     }
 
@@ -65,7 +65,7 @@ public class BeerServiceImpl implements BeerService {
         beer.setPrice(beerDto.getPrice());
         beer.setUpc(beerDto.getUpc());
 
-        return beerMapper.beerToBeerDto(beerRepository.save(beer));
+        return beerMapper.beerToBeerDto(beerRepository.saveAndFlush(beer));
     }
 
     @Override

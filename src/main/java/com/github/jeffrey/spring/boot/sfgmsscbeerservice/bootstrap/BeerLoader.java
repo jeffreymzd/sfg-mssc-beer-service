@@ -68,6 +68,8 @@ public class BeerLoader implements CommandLineRunner {
                     .lastModifiedDate(currentTimestamp)
                     .build());
 
+            beerRepository.flush();
+
             log.info("Data initialization via BeerLoader: completed");
         }
 
